@@ -56,4 +56,26 @@
 
     echo $lambo;
     echo "<p><b>This is a Class Object: </b></p>", var_dump($lambo);
+
+    echo "<br>*******************************************<br>";
+    echo "<h3>Pattern (8 Columns and rows)</h3>";
+    echo "<br>*******************************************<br>";
+
+    $row = "";
+    $rowNum = 8;
+
+    for ($i = $rowNum; $i > 0; $i--) {
+        if ($i < $rowNum) {
+            $row = $row . " #";
+        }
+    }
+
+    for ($i = 0; $i < $rowNum; $i++) {
+        if ($i % 2 == 0) {
+            echo "<p>&nbsp;$row</p>";
+        } else {
+            echo "<p>$row</p>";
+        }
+    }
+
 ?>
