@@ -45,3 +45,48 @@ $bar = function () use ($some_value) {
 $foo();
 
 $bar();
+
+// Passing functions as Parameters to Other functions
+// You want to define part of a function's implementation and pass that implementation
+// as an argument to another function.
+// Solution: Define a closure that implements part of the logic you need and pass that directly
+// into another function as if it were a variable:
+
+$reducer = function (?int $carry, int $item): int {
+  return $carry + $item;
+};
+
+function reduce(array $array, callable $callback, ?int $initial = null)
+{
+  $acc = $initial;
+  foreach ($array as $item) {
+    $acc = $callback($acc, $item);
+  }
+
+  return $acc;
+}
+
+$list = [1, 2, 3, 4, 5];
+$sum = reduce($list, $reducer);
+
+echo $sum . PHP_EOL;
+
+// Walk throughh carrying in PHP
+function multiply(int $x, int $y): int
+{
+  return $x * $y;
+}
+
+echo multiply(7, 3);
+
+echo "" . PHP_EOL;
+
+
+function carried_multiply(int $x): callable
+{
+  return function (int $y) use ($x): int {
+    return $x * $y;
+  };
+}
+
+echo carried_multiply(7)(3);
